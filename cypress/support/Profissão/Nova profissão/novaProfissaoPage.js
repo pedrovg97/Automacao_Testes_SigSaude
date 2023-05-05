@@ -1,4 +1,3 @@
-//import { profissaoConselhoMap } from '../../../fixtures/Dados/conselhoProfissaoMap.js';
 
 export class NovaProfissao {
 

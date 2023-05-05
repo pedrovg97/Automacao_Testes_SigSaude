@@ -1,7 +1,6 @@
 import { Login } from "../support/Login/Login/loginPage"
 import { NovaEspecialidade } from "../support/Especialidade/Nova especialidade/novaEspecialidadePage"
 import { NovaProfissao } from "../support/Profissão/Nova profissão/novaProfissaoPage"
-//import { credenciais } from "../fixtures/Dados/credenciais";
 
 const LoginClass = new Login();
 const ProfissaoClass = new NovaProfissao();

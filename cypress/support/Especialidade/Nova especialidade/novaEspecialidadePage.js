@@ -1,5 +1,4 @@
 import { NovaProfissao } from '../../Profissão/Nova profissão/novaProfissaoPage.js';
-//import { profissaoEspecialidadeMap } from '../../../fixtures/Dados/profissaoEspecialidadeMap.js';
 
 export class NovaEspecialidade {
 
