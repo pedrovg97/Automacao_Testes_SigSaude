@@ -20,7 +20,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
 
     LoginClass.acessarPagina();
     cy.fixture('credenciais.json').then((fixture) => {
-      LoginClass.preencherLogin(fixture.usuarioPadrao["login"], fixture.usuarioPadrao["senha"]);
+      LoginClass.preencherLogin(fixture.credenciais.usuarioPadrao["login"], fixture.credenciais.usuarioPadrao["senha"]);
     });
     denominacaoValida = 'Denominação teste: ' + Math.random() * 1000;
     denominacaoInvalida = 'Denominação teste: ' + Math.random() * 1000 + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
