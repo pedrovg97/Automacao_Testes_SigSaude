@@ -16,11 +16,11 @@ describe('Automatização do cadastro de especialidades do sistema', () => {
 
     LoginClass.acessarPagina();
     cy.fixture('credenciais.json').then((fixture) => {
-      LoginClass.preencherLogin(fixture.usuarioPadrao["login"], fixture.usuarioPadrao["senha"]);
+      LoginClass.preencherLogin(fixture.credenciais.usuarioPadrao["login"], fixture.credenciais.usuarioPadrao["senha"]);
     });
 
     cy.fixture('especialidades.json').then((fixture) => {
-      for (let i = 1; i < fixture.especialidades.length; i++) {
+      for (let i in fixture.especialidades) {
         EspecialidadeClass.acessaNovaEspecialidade(fixture.especialidades[i]);
       }
     });
