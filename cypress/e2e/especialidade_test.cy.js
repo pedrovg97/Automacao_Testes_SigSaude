@@ -25,8 +25,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     denominacaoValida = 'Denominação teste: ' + Math.random() * 1000;
     denominacaoInvalida = 'Denominação teste: ' + Math.random() * 1000 + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
     denominacaoInvalidaValida = denominacaoInvalida.substring(0, 200);
-
-    cy.visit('http://localhost:8080/sigsaude/especialidade/form'); // Acessa a página do formulário
+    EspecialidadeClass.acessaPaginaEspecialidade()// Acessa a página do formulário
 
   })
 
@@ -180,6 +179,38 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.preencheDescricaoMaiorQue200(descricaoInvalida, descricaoInvalidaValida); // Preenche a descrição com uma string > 200 e verifica se o campo está registrando apenas os primeiros 200 caracteres.
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaConfirmacaoEspecialidade(denominacaoInvalidaValida, profissaoTeste, descricaoInvalidaValida);
+
+  })
+
+  it('Não deve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição vazia', () => {
+    EspecialidadeClass.criaNovaEspecialidade(denominacaoValida); //cria uma especialidade
+    EspecialidadeClass.acessaPaginaEspecialidade();
+    EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    EspecialidadeClass.botaoAvancar(); // Botão avançar
+    EspecialidadeClass.verificaErroDenominacaoAparece();
+
+  })
+
+  it('Não eve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição <= 200', () => {
+    EspecialidadeClass.criaNovaEspecialidade(denominacaoValida); //cria uma especialidade
+    EspecialidadeClass.acessaPaginaEspecialidade();
+    EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    EspecialidadeClass.preencheDescricaoMenorQue200(descricaoValida); // Preenche a descrição com uma string <= 200.
+    EspecialidadeClass.botaoAvancar(); // Botão avançar
+    EspecialidadeClass.verificaErroDenominacaoAparece();
+
+  })
+
+  it('Não eve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição > 200', () => {
+    EspecialidadeClass.criaNovaEspecialidade(denominacaoValida); //cria uma especialidade
+    EspecialidadeClass.acessaPaginaEspecialidade();
+    EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    EspecialidadeClass.preencheDescricaoMaiorQue200(descricaoInvalida, descricaoInvalidaValida);
+    EspecialidadeClass.botaoAvancar(); // Botão avançar
+    EspecialidadeClass.verificaErroDenominacaoAparece();
 
   })
 

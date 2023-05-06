@@ -38,6 +38,10 @@ export class NovaEspecialidade {
     cy.get('#inputDenominacao').type(denominacaoInvalida).should('have.value', denominacaoInvalidaValida) // Preenche a denominação com uma string > 200
   }
 
+  acessaPaginaEspecialidade(){
+    cy.visit('http://localhost:8080/sigsaude/especialidade/form'); // Acessa a página do formulário
+  }
+
   verificaConfirmacaoEspecialidade(denominacao, profissao, descricao) {
 
     if (cy.contains("Denominação: " + denominacao.toUpperCase()).should('exist') && cy.contains("Profissão: " + profissao.toUpperCase()).should('exist') && cy.contains("Descrição: " + descricao).should('exist')) {
@@ -46,13 +50,13 @@ export class NovaEspecialidade {
     }
   }
 
-  acessaNovaEspecialidade(denominacao) {
+  criaNovaEspecialidade(denominacao) {
 
     const ProfissaoClass = new NovaProfissao();
     const descricao = "Especialidade em " + denominacao;
     
     cy.fixture('profissaoEspecialidadeMap.json').then((fixture) => {
-      const profissao = fixture.profissaoEspecialidadeMap[denominacao];
+      const profissao = fixture.profissaoEspecialidadeMap[denominacao] ?? 'Cirurgião'; //caso n ache a propriedade denominação no json, profissão recebe 'Cirurgião'
 
       cy.visit('http://localhost:8080/sigsaude/especialidade/form');
 
