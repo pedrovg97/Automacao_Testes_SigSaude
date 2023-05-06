@@ -30,6 +30,19 @@ export class NovaEspecialidade {
     cy.get('#inputDescricao').type(descricaoInvalida).should('have.value', descricaoInvalidaValida) // Preenche a descrição com uma string > 200 e verifica se o campo está registrando apenas os primeiros 200 caracteres.
   }
 
+  verificaDescricaoPosErro(descricao) {
+    cy.get('#inputDescricao').should('have.value', descricao); // verifica se o campo descrição mantém o conteúdo mesmo após o erro apresentado.
+  }
+
+  verificaDenominacaoPosErro(denominacao) {
+    cy.get('#inputDenominacao').should('have.value', denominacao); // verifica se o campo descrição mantém o conteúdo mesmo após o erro apresentado.
+  }
+
+  verificaProfissaoPosErro(profissao) {
+    const sigla = profissao.toUpperCase().slice(0, 3);
+    cy.get('#selectProfissao').should('have.value', sigla); // verifica se o campo descrição mantém o conteúdo mesmo após o erro apresentado.
+  }
+
   preencheDenominacaoMenorQue200(denominacaoValida) {
     cy.get('#inputDenominacao').type(denominacaoValida) // Preenche a denominação com uma string <= 200
   }
@@ -38,7 +51,7 @@ export class NovaEspecialidade {
     cy.get('#inputDenominacao').type(denominacaoInvalida).should('have.value', denominacaoInvalidaValida) // Preenche a denominação com uma string > 200
   }
 
-  acessaPaginaEspecialidade(){
+  acessaPaginaEspecialidade() {
     cy.visit('http://localhost:8080/sigsaude/especialidade/form'); // Acessa a página do formulário
   }
 
@@ -54,7 +67,7 @@ export class NovaEspecialidade {
 
     const ProfissaoClass = new NovaProfissao();
     const descricao = "Especialidade em " + denominacao;
-    
+
     cy.fixture('profissaoEspecialidadeMap.json').then((fixture) => {
       const profissao = fixture.profissaoEspecialidadeMap[denominacao] ?? 'Cirurgião'; //caso n ache a propriedade denominação no json, profissão recebe 'Cirurgião'
 
