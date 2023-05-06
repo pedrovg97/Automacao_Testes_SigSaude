@@ -4,7 +4,7 @@ const LoginClass = new Login();
 
 describe('Teste de Login', () => {
   beforeEach(() => {
-    LoginClass.acessarPagina();
+    LoginClass.acessarPaginaLogin();
 
   })
 

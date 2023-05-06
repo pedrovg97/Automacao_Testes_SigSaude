@@ -1,7 +1,13 @@
+import { NovaEspecialidade } from "../../Especialidade/Nova especialidade/novaEspecialidadePage";
 
 export class NovaProfissao {
 
+
+
     preencheProfissao(profissao) {
+
+        const EspecialidadeClass = new NovaEspecialidade();
+
         cy.get('#selectProfissao').then(select => {
             const options = select[0].options;
             for (let i = 0; i < options.length; i++) {
@@ -13,9 +19,16 @@ export class NovaProfissao {
             }
             // A opção desejada não está presente, então crie uma nova
             this.criaNovaProfissao(profissao);
-            cy.visit('http://localhost:8080/sigsaude/especialidade/form');
+            EspecialidadeClass.acessaPaginaEspecialidade();
             cy.get('#selectProfissao').select(profissao.toUpperCase());
         });
+    }
+
+    acessaPaginaProfissao() {
+        cy.fixture('url.json').then((fixture) => {
+            cy.visit(fixture.paginas.paginaNovaProfissao); // Acessa a página do formulário
+
+        })
     }
 
     criaNovaProfissao(nomeProfissao) {
@@ -26,7 +39,7 @@ export class NovaProfissao {
         cy.fixture('conselhoProfissaoMap.json').then((fixture) => {
             const conselho = fixture.conselhoProfissaoMap[nomeProfissao];
 
-            cy.visit('http://localhost:8080/sigsaude/profissao/form');
+            this.acessaPaginaProfissao();
 
             cy.get('#inputNome').type(nomeProfissao).should('have.value', nomeProfissao);
 

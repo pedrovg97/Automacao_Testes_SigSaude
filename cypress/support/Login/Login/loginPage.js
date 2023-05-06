@@ -1,7 +1,10 @@
 export class Login {
 
-    acessarPagina(){
-        cy.visit('http://localhost:8080/sigsaude/login');
+    acessarPaginaLogin(){
+        cy.fixture('url.json').then((fixture) => {
+            cy.visit(fixture.paginas.paginaLoginLocalHost);
+        })
+        
     }
 
     preencherLogin(usuario, senha){
