@@ -18,7 +18,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
 
   beforeEach(() => {
 
-    LoginClass.acessarPagina();
+    LoginClass.acessarPaginaLogin();
     cy.fixture('credenciais.json').then((fixture) => {
       LoginClass.preencherLogin(fixture.credenciais.usuarioPadrao["login"], fixture.credenciais.usuarioPadrao["senha"]);
     });

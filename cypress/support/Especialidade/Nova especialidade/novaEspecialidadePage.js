@@ -52,7 +52,10 @@ export class NovaEspecialidade {
   }
 
   acessaPaginaEspecialidade() {
-    cy.visit('http://localhost:8080/sigsaude/especialidade/form'); // Acessa a página do formulário
+    cy.fixture('url.json').then((fixture) => {
+      cy.visit(fixture.paginas.paginaNovaEspecialidade); // Acessa a página do formulário
+
+    })
   }
 
   verificaConfirmacaoEspecialidade(denominacao, profissao, descricao) {
