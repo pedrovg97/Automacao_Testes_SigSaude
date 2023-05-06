@@ -41,6 +41,8 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoValida); // Verifica se o campo descrição mantém os dados após o erro
+
 
   })
 
@@ -49,6 +51,8 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoInvalidaValida); // Verifica se o campo descrição mantém os dados após o erro
+
 
   })
 
@@ -57,6 +61,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoNaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaProfissaoPosErro(profissaoTeste) // Verifica de o select profissão mantém os dados após o erro
 
   })
 
@@ -66,6 +71,8 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoNaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaProfissaoPosErro(profissaoTeste) // Verifica de o select profissão mantém os dados após o erro
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
@@ -75,15 +82,17 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoNaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaProfissaoPosErro(profissaoTeste) // Verifica de o select profissão mantém os dados após o erro
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoInvalidaValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
   it('Não deve permitir a submissão do formulário com uma denominação <= 200, profissao e descrição vazios', () => {
     EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
-    EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoNaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDenominacaoPosErro(denominacaoValida); // Verifica se campo denominação mantém os dados após o ero
 
   })
 
@@ -93,15 +102,19 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoNaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDenominacaoPosErro(denominacaoValida); // Verifica se campo denominação mantém os dados após o ero
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
-  it('Não deve permitir a submissão do formulário com uma string <= 200, profissão vazia  e uma descrição > 200', () => {
+  it('Não deve permitir a submissão do formulário com uma denominação <= 200, profissão vazia  e uma descrição > 200', () => {
     EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
     EspecialidadeClass.preencheDescricaoMaiorQue200(descricaoInvalida, descricaoInvalidaValida); // Preenche a descrição com uma string > 200 e verifica se o campo está registrando apenas os primeiros 200 caracteres.
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoNaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDenominacaoPosErro(denominacaoValida); // Verifica se campo denominação mantém os dados após o ero
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoInvalidaValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
@@ -136,6 +149,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoNaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDenominacaoPosErro(denominacaoInvalidaValida); // Verifica se campo denominação mantém os dados após o ero
 
   })
 
@@ -145,15 +159,20 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoNaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDenominacaoPosErro(denominacaoInvalidaValida); // Verifica se campo denominação mantém os dados após o ero
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
-  it('Não deve permitir a submissão do formulário com uma string > 200, profissão vazia  e uma descrição > 200', () => {
+  it('Não deve permitir a submissão do formulário com uma denomicação > 200, profissão vazia  e uma descrição > 200', () => {
     EspecialidadeClass.preencheDenominacaoMaiorQue200(denominacaoInvalida, denominacaoInvalidaValida); // Preenche a denominação com uma string > 200
     EspecialidadeClass.preencheDescricaoMaiorQue200(descricaoInvalida, descricaoInvalidaValida); // Preenche a descrição com uma string > 200 e verifica se o campo está registrando apenas os primeiros 200 caracteres.
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoNaoAparece(); // Verifica se a mensagem de erro é exibida
     EspecialidadeClass.verificaErroProfissaoAparece(); // Verifica se a mensagem de erro é exibida
+    EspecialidadeClass.verificaDenominacaoPosErro(denominacaoInvalidaValida); // Verifica se campo denominação mantém os dados após o ero
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoInvalidaValida); // Verifica se o campo descrição mantém os dados após o erro
+
   })
 
   it('Deve permitir a submissão do formulário com uma denominação > 200, uma profissão valida e uma descrição vazia.', () => {
@@ -192,7 +211,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
 
   })
 
-  it('Não eve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição <= 200', () => {
+  it('Não deve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição <= 200', () => {
     EspecialidadeClass.criaNovaEspecialidade(denominacaoValida); //cria uma especialidade
     EspecialidadeClass.acessaPaginaEspecialidade();
     EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
@@ -200,10 +219,11 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.preencheDescricaoMenorQue200(descricaoValida); // Preenche a descrição com uma string <= 200.
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece();
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
-  it('Não eve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição > 200', () => {
+  it('Não deve permitir a submissão do formulário com uma denominação e profissao ja existente, e descrição > 200', () => {
     EspecialidadeClass.criaNovaEspecialidade(denominacaoValida); //cria uma especialidade
     EspecialidadeClass.acessaPaginaEspecialidade();
     EspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoValida); // Preenche a denominação com uma string <= 200
@@ -211,6 +231,7 @@ describe('Teste do formulário de cadastro de especialidade', () => {
     EspecialidadeClass.preencheDescricaoMaiorQue200(descricaoInvalida, descricaoInvalidaValida);
     EspecialidadeClass.botaoAvancar(); // Botão avançar
     EspecialidadeClass.verificaErroDenominacaoAparece();
+    EspecialidadeClass.verificaDescricaoPosErro(descricaoInvalidaValida); // Verifica se o campo descrição mantém os dados após o erro
 
   })
 
