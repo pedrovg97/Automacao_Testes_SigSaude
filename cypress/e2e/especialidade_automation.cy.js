@@ -21,7 +21,7 @@ describe('Automatização do cadastro de especialidades do sistema', () => {
 
     cy.fixture('especialidades.json').then((fixture) => {
       for (let i in fixture.especialidades) {
-        EspecialidadeClass.acessaNovaEspecialidade(fixture.especialidades[i]);
+        EspecialidadeClass.criaNovaEspecialidade(fixture.especialidades[i]);
       }
     });
   });

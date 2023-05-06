@@ -12,13 +12,13 @@ export class NovaProfissao {
                 }
             }
             // A opção desejada não está presente, então crie uma nova
-            this.acessaNovaProfissao(profissao);
+            this.criaNovaProfissao(profissao);
             cy.visit('http://localhost:8080/sigsaude/especialidade/form');
             cy.get('[id="selectProfissao"]').select(profissao.toUpperCase());
         });
     }
 
-    acessaNovaProfissao(nomeProfissao) {
+    criaNovaProfissao(nomeProfissao) {
 
         const nomeProfissaoSemAcento = nomeProfissao.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const sigla = nomeProfissaoSemAcento.slice(0, 3);
