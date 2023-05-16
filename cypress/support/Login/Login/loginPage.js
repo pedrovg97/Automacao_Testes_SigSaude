@@ -3,6 +3,7 @@ export class Login {
     acessarPaginaLogin(){
         cy.fixture('url.json').then((fixture) => {
             cy.visit(fixture.paginas.paginaLoginLocalHost);
+            cy.url().should('include', '/sigsaude/login')
         })
         
     }

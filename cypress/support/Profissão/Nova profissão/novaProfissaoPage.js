@@ -27,14 +27,21 @@ export class NovaProfissao {
     acessaPaginaProfissao() {
         cy.fixture('url.json').then((fixture) => {
             cy.visit(fixture.paginas.paginaNovaProfissao); // Acessa a página do formulário
+            cy.url().should('include', '/sigsaude/profissao/form')
 
         })
     }
 
+    criaSigla(nomeProfissao) {
+        const nomeProfissaoSemAcento = nomeProfissao.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//tira os acentos da string
+        const sigla = nomeProfissaoSemAcento.slice(0, 3);//retira os 3 primeiros caracteres da string
+        return sigla;
+    }
+
     criaNovaProfissao(nomeProfissao) {
 
-        const nomeProfissaoSemAcento = nomeProfissao.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const sigla = nomeProfissaoSemAcento.slice(0, 3);
+
+        const sigla = this.criaSigla(nomeProfissao);
 
         cy.fixture('conselhoProfissaoMap.json').then((fixture) => {
             const conselho = fixture.conselhoProfissaoMap[nomeProfissao];
