@@ -3,6 +3,7 @@ import { NovaEspecialidade } from "../support/Especialidade/Nova especialidade/n
 import { NovaProfissao } from "../support/Profissão/Nova profissão/novaProfissaoPage"
 import { ListarEspecialidade } from "../support/Especialidade/Listar especialidade/listarEspecialidadePage";
 
+
 const LoginClass = new Login();
 const ProfissaoClass = new NovaProfissao();
 const NovaEspecialidadeClass = new NovaEspecialidade();
@@ -13,10 +14,15 @@ const profissaoTeste = 'Cirurgião';
 const descricaoValida = 'Descrição teste';
 const descricaoInvalida = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 const descricaoInvalidaValida = descricaoInvalida.substring(0, 200);
+let denominacaoEditada
+let descricaoEditada
+let descricaoPadrao;
 let denominacaoValida;
 let denominacaoInvalida;
 let denominacaoInvalidaValida;
 let sigla;
+let justificativa;
+
 
 describe('Teste do formulário de cadastro de especialidade', () => {
 
@@ -249,9 +255,16 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
       LoginClass.preencherLogin(fixture.credenciais.usuarioPadrao["login"], fixture.credenciais.usuarioPadrao["senha"]);
     });
 
+    denominacaoEditada = 'Denominação teste editada: ' + Math.random() * 1000;
+    descricaoEditada = "Especialidade em " + denominacaoEditada;
+
     denominacaoValida = 'Denominação teste: ' + Math.random() * 1000;
-    NovaEspecialidadeClass.criaNovaEspecialidade(denominacaoValida);//cria uma especialidade
+    descricaoPadrao = "Especialidade em " + denominacaoValida;
     sigla = ProfissaoClass.criaSigla(profissaoTeste);
+
+    justificativa = "Inativação da especialidade: " + denominacaoValida;
+
+    NovaEspecialidadeClass.criaNovaEspecialidade(denominacaoValida);//cria uma especialidade
 
   });
 
@@ -412,4 +425,58 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
 
   })
 
+  it('Deve exibir os dados da especialidade ao clicar em Vizualizar especialidade após a pesquisa', () => {
+    ListarEspecialidadeClass.preencheDenominacao(denominacaoValida);
+    ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
+    ListarEspecialidadeClass.verificaVizualizar(denominacaoValida, sigla, profissaoTeste, descricaoPadrao);//verifica se os dados da especialidade constam na página "Visualizar especialidae"
+
+  })
+
+  it('Deve permitir a edição da especialidade ao inserir dados validos na página de edição', () => {
+    ListarEspecialidadeClass.preencheDenominacao(denominacaoValida);
+    ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
+    ListarEspecialidadeClass.acessaAlterarEspecialidade();
+    NovaEspecialidadeClass.preencheDenominacaoMenorQue200(denominacaoEditada); // Preenche a denominação com uma string <= 200
+    NovaEspecialidadeClass.preencheDescricaoMenorQue200(descricaoEditada); // Preenche a descrição com uma string <= 200.
+    NovaEspecialidadeClass.botaoAvancar(); // Botão avançar
+    NovaEspecialidadeClass.verificaConfirmacaoEspecialidade(denominacaoEditada, profissaoTeste, descricaoEditada);
+    ListarEspecialidadeClass.preencheDenominacao(denominacaoEditada);
+    ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
+    ListarEspecialidadeClass.verificaVizualizar(denominacaoEditada, sigla, profissaoTeste, descricaoEditada);//verifica se os dados da especialidade constam na página "Visualizar especialidae"
+
+  })
+
+  it('Não deve permitir a inativação da especialidade com uma justificativa vazia', () => {
+    ListarEspecialidadeClass.preencheDenominacao(denominacaoEditada);
+    ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
+    ListarEspecialidadeClass.acessaInativarEspecialidade();//acessa a pagina de inativação através do botão inativar
+    ListarEspecialidadeClass.botaoInativar();//clica no botão que confirma a inativação
+    ListarEspecialidadeClass.verificaErroCamposVazios();//verifica se aparece o erro dizendo q a justificativa não pode ser vaziaa
+
+  })
+
+  it('Deve permitir a inativação da especialidade com uma justificativa válida', () => {
+    ListarEspecialidadeClass.preencheDenominacao(denominacaoEditada);
+    ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
+    ListarEspecialidadeClass.inativaEspecialidade(justificativa);
+    //pesquisa novamente pela especialidade para ver se realmente foi inativada
+    ListarEspecialidadeClass.preencheDenominacao(denominacaoEditada);
+    ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
+    ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
+    ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
+
+  })
+
 })
+
+
