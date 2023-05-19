@@ -19,7 +19,7 @@ export class NovaProfissao {
             }
             // A opção desejada não está presente, então crie uma nova
             this.criaNovaProfissao(profissao);
-            EspecialidadeClass.acessaPaginaEspecialidade();
+            EspecialidadeClass.acessaPaginaNovaEspecialidade();
             cy.get('#selectProfissao').select(profissao.toUpperCase());
         });
     }

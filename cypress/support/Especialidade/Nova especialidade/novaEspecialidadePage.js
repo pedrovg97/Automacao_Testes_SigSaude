@@ -6,6 +6,10 @@ export class NovaEspecialidade {
     cy.get('#nextBtn').click(); // Botão avançar
   }
 
+  botaoOk() {
+    cy.get('button.swal-button.swal-button--confirm').click();
+  }
+
   verificaErroDenominacaoAparece() {
     cy.get('#erroDenominacao').should('be.visible'); // Verifica se a mensagem de erro é exibida
   }
@@ -23,6 +27,7 @@ export class NovaEspecialidade {
   }
 
   preencheDescricaoMenorQue200(descricaoValida) {
+    cy.get('#inputDescricao').clear();
     cy.get('#inputDescricao').type(descricaoValida).should('have.value', descricaoValida); // Preenche a descrição com uma string <= 200
   }
 
@@ -44,6 +49,7 @@ export class NovaEspecialidade {
   }
 
   preencheDenominacaoMenorQue200(denominacaoValida) {
+    cy.get('#inputDenominacao').clear();
     cy.get('#inputDenominacao').type(denominacaoValida) // Preenche a denominação com uma string <= 200
   }
 
@@ -59,17 +65,14 @@ export class NovaEspecialidade {
     })
   }
 
+
   verificaConfirmacaoEspecialidade(denominacao, profissao, descricao) {
 
     if (cy.contains("Denominação: " + denominacao.toUpperCase()).should('exist') && cy.contains("Profissão: " + profissao.toUpperCase()).should('exist') && cy.contains("Descrição: " + descricao).should('exist')) {
       this.botaoAvancar();
-      cy.get('button.swal-button.swal-button--confirm').click();
+      this.botaoOk();
     }
   }
-
-
-
-
 
   criaNovaEspecialidade(denominacao) {
 
