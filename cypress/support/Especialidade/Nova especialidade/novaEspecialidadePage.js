@@ -40,12 +40,12 @@ export class NovaEspecialidade {
   }
 
   verificaDenominacaoPosErro(denominacao) {
-    cy.get('#inputDenominacao').should('have.value', denominacao); // verifica se o campo descrição mantém o conteúdo mesmo após o erro apresentado.
+    cy.get('#inputDenominacao').should('have.value', denominacao); // verifica se o campo denominação mantém o conteúdo mesmo após o erro apresentado.
   }
 
   verificaProfissaoPosErro(profissao) {
     const sigla = profissao.toUpperCase().slice(0, 3);
-    cy.get('#selectProfissao').should('have.value', sigla); // verifica se o campo descrição mantém o conteúdo mesmo após o erro apresentado.
+    cy.get('#selectProfissao').should('have.value', sigla); // verifica se o campo profissao mantém o conteúdo mesmo após o erro apresentado.
   }
 
   preencheDenominacaoMenorQue200(denominacaoValida) {
