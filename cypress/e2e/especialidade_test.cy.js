@@ -359,7 +359,7 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
 
   })
 
-  it('Deve exibir o resultado da pesquisa ao pesquisar por denominação existente e codigo inexistente', () => {
+  it('Deve exibir uma tabela vazia ao pesquisar por denominação existente e codigo inexistente', () => {
     ListarEspecialidadeClass.preencheDenominacao(denominacaoValida);
     ListarEspecialidadeClass.preencheCodigo(codigoInexistente); // Preenche com o código da especialidade criada
     ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
@@ -367,7 +367,7 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
 
   })
 
-  it('Deve exibir o resultado da pesquisa ao pesquisar por denominação existente, codigo inexistente e profissão valida', () => {
+  it('Deve exibir uma tabela vazia ao pesquisar por denominação existente, codigo inexistente e profissão valida', () => {
     ListarEspecialidadeClass.preencheDenominacao(denominacaoValida);
     ListarEspecialidadeClass.preencheCodigo(codigoInexistente); // Preenche com o código da especialidade criada
     ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
@@ -425,12 +425,12 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
 
   })
 
-  it('Deve exibir os dados da especialidade ao clicar em Vizualizar especialidade após a pesquisa', () => {
+  it('Deve exibir os dados da especialidade ao clicar em Visualizar especialidade após a pesquisa', () => {
     ListarEspecialidadeClass.preencheDenominacao(denominacaoValida);
     ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
     ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
     ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
-    ListarEspecialidadeClass.verificaVizualizar(denominacaoValida, sigla, profissaoTeste, descricaoPadrao);//verifica se os dados da especialidade constam na página "Visualizar especialidae"
+    ListarEspecialidadeClass.verificaVisualizar(denominacaoValida, sigla, profissaoTeste, descricaoPadrao);//verifica se os dados da especialidade constam na página "Visualizar especialidae"
 
   })
 
@@ -448,7 +448,7 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
     ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
     ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
     ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
-    ListarEspecialidadeClass.verificaVizualizar(denominacaoEditada, sigla, profissaoTeste, descricaoEditada);//verifica se os dados da especialidade constam na página "Visualizar especialidae"
+    ListarEspecialidadeClass.verificaVisualizar(denominacaoEditada, sigla, profissaoTeste, descricaoEditada);//verifica se os dados da especialidade constam na página "Visualizar especialidae"
 
   })
 
@@ -468,7 +468,7 @@ describe('Teste do formulário de pesquisa de especialidade', () => {
     ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada
     ProfissaoClass.preencheProfissao(profissaoTeste);// Seleciona uma profissao válida
     ListarEspecialidadeClass.botaoPesquisar(); // Botão pesquisar
-    ListarEspecialidadeClass.inativaEspecialidade(justificativa);
+    ListarEspecialidadeClass.inativar(justificativa);
     //pesquisa novamente pela especialidade para ver se realmente foi inativada
     ListarEspecialidadeClass.preencheDenominacao(denominacaoEditada);
     ListarEspecialidadeClass.preencheCodigo(sigla); // Preenche com o código da especialidade criada

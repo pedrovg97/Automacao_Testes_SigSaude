@@ -1,13 +1,13 @@
-//import { NovaProfissao } from '../../Profissão/Nova profissão/novaProfissaoPage.js';
+import { NovaProfissao } from '../../Profissão/Nova profissão/novaProfissaoPage.js';
 
-export class ListarEspecialidade {
+export class ListarProfissao {
 
     botaoInativar() {
         cy.get('[class="btn btn-success"]').click(); // Botão inativar
     }
 
     botaoPesquisar() {
-        cy.get('#pesquisarEspecialidade').click(); // Botão avançar
+        cy.get('#pesquisarProfissao').click(); // Botão avançar
     }
 
     botaoOk() {
@@ -34,9 +34,9 @@ export class ListarEspecialidade {
     verificaColuna(valor, coluna) {
         let numeroColuna;
 
-        if (coluna == "Denominação") numeroColuna = 0;
-        else if (coluna == "Código") numeroColuna = 1;
-        else if (coluna == "Profissão") numeroColuna = 2;
+        if (coluna == "Nome") numeroColuna = 0;
+        else if (coluna == "Nivel de Formação") numeroColuna = 1;
+        else if (coluna == "Sigla") numeroColuna = 2;
 
         cy.get('#dataTable tbody tr').each((row) => { // seleciona todas as tr (linhas da tabela e faz um iteraçãoem cada linha )
             const td = row.find('td').eq(numeroColuna) //find.eq(2) retorna o terceiro td (coluna profissao) da linha atual(row)
@@ -45,28 +45,28 @@ export class ListarEspecialidade {
 
     }
 
-    acessaVizualizarEspecialidade() {
+    acessaVizualizarProfissao() {
         cy.get('.btn-sigsaude.btnCorVisualizar').click();
     }
 
-    acessaAlterarEspecialidade() {
+    acessaAlterarProfissao() {
         cy.get('.btn-sigsaude.btnCorEditar').click();
     }
 
-    acessaInativarEspecialidade() {
+    acessaInativarProfissao() {
         cy.get('.btn-sigsaude.btnCorInativar').click();
     }
 
-    verificaVisualizar(denominacao, codigo, profissao, descricao) {
-        this.acessaVizualizarEspecialidade();
-        cy.get('p').eq(0).contains("Denominação: " + denominacao.toUpperCase()).should('exist');
-        cy.get('p').eq(1).contains("Profissão: " + profissao.toUpperCase()).should('exist');
-        cy.get('p').eq(2).contains("Código: " + codigo.toUpperCase()).should('exist');
-        cy.get('p').eq(3).contains("Descrição: " + descricao.toUpperCase()).should('exist');
+    verificaVisualizar(nome, sigla, nivel, conselho) {
+        this.acessaVizualizarProfissao();
+        cy.get('p').eq(0).contains("Nome: " + nome.toUpperCase()).should('exist');
+        cy.get('p').eq(1).contains("Sigla: " + sigla.toUpperCase()).should('exist');
+        cy.get('p').eq(2).contains("Nivel Formação: " + nivel.toUpperCase()).should('exist');
+        cy.get('p').eq(3).contains("Conselho Profissional: " + conselho.toUpperCase()).should('exist');
 
     }
 
-    inativar(justificativa) {
+    inativaEspecialidade(justificativa) {
 
         if (justificativa == null) {
             justificativa = ' ';
@@ -79,14 +79,27 @@ export class ListarEspecialidade {
 
     }
 
-    acessaPaginaListarEspecialidade() {
+    verificaConfirmacaoProfissao() {
+        const NovaProfissaoClass = new NovaProfissao();
+
+        NovaProfissaoClass.botaoAvancar();
+
+        NovaProfissaoClass.botaoOk();
+
+    }
+
+    acessaPaginaListarProfissao() {
         cy.fixture('url.json').then((fixture) => {
-            cy.visit(fixture.paginas.paginaListarEspecialidade); // Acessa a página do formulário
-            cy.url().should('include', '/sigsaude/especialidade')
+            cy.visit(fixture.paginas.paginaListarProfissao); // Acessa a página do formulário
+            cy.url().should('include', '/sigsaude/profissao')
 
         })
     }
 
+    preencheNivelFormacao(nivelFormacao) {
+        cy.get('#selectNivelFormacao').select(nivelFormacao);
+        cy.get('#selectNivelFormacao').contains(nivelFormacao);
+    }
 }
 
-export default new ListarEspecialidade();
+export default new ListarProfissao();
