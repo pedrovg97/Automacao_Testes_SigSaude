@@ -3,7 +3,9 @@
         "paginaLoginLocalHost": "http://localhost:8080/sigsaude/login",
         "paginaNovaEspecialidade": "http://localhost:8080/sigsaude/especialidade/form",
         "paginaNovaProfissao": "http://localhost:8080/sigsaude/profissao/form",
-        "paginaListarEspecialidade": "http://localhost:8080/sigsaude/especialidade"
+        "paginaListarEspecialidade": "http://localhost:8080/sigsaude/especialidade",
+        "paginaListarProfissao": "http://localhost:8080/sigsaude/profissao"
+
 
     }
 }
